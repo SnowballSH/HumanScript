@@ -1,17 +1,14 @@
 class HObject
-  attr_accessor :runtime_class, :value
+  attr_accessor :runtime_class, :value, :callable
 
   def initialize(runtime_class, value = self)
     @runtime_class = runtime_class
     @value = value
+    @callable = false
   end
 
   def call(method, arguments = [])
     @runtime_class.lookup(method).call(self, arguments)
-  end
-
-  def callable?
-    false
   end
 end
 
@@ -26,13 +23,15 @@ class HClass < HObject
   def lookup(method_name)
     method = @runtime_vars[method_name]
     raise "Method not found: #{method_name}" if method.nil?
-    raise "#{method_name} is not callable" unless method.callable?
+    raise "#{method_name} is not callable" unless method.callable
 
-    method
+    method.value
   end
 
   def def(name, &block)
-    @runtime_vars[name.to_s] = block
+    x = $constants['Function'].new_with_value(block)
+    x.callable = true
+    @runtime_vars[name.to_s] = x
   end
 
   def assign(name, val)

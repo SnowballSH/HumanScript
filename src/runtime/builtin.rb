@@ -2,6 +2,9 @@ $constants = {}
 $constants['Class'] = HClass.new
 $constants['Class'].runtime_class = $constants['Class']
 $constants['Object'] = HClass.new
+
+$constants['Function'] = HClass.new
+
 $constants['Number'] = HClass.new
 
 $constants['NilClass'] = HClass.new

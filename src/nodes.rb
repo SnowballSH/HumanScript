@@ -33,3 +33,16 @@ VarAssignNode = Struct.new(:name, :value) do
     ctx.locals[name] = value.eval(ctx)
   end
 end
+
+CallNode = Struct.new(:receiver, :name, :args) do
+  def eval(ctx)
+    value = if receiver
+              receiver.eval(ctx)
+            else
+              ctx.current_self
+            end
+
+    evaluated_arguments = args.map { |arg| arg.eval(ctx) }
+    value.call(name, evaluated_arguments)
+  end
+end

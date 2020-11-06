@@ -7,7 +7,7 @@ end
 def main
   fn = ARGV[0]
   code = File.read(fn)
-  run(code)
+  p run(code)
 end
 
 main

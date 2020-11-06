@@ -2,6 +2,15 @@ class Parser
 
 token INTEGER IDEN NEWLINE DEFINE
 
+prechigh
+  left  '.'
+  right '!'
+  left  '*' '/'
+  left  '+' '-'
+  right '='
+  left  ','
+preclow
+
 rule
 
 Program:
@@ -18,10 +27,27 @@ Expressions:
 ;
 
 Expression:
-  INTEGER                       { result = IntegerNode.new(val[0].to_i) }
+    INTEGER                     { result = IntegerNode.new(val[0].to_i) }
+  | Call
   | IDEN                        { result = VarAccessNode.new(val[0]) }
-  | DEFINE IDEN Expression      { result = VarAssignNode.new(val[1], val[2]) }
+  | DEFINE IDEN '=' Expression  { result = VarAssignNode.new(val[1], val[3]) }
   | '(' Expression ')'          { result = val[1] }
+;
+
+Call:
+    IDEN Arguments          { result = CallNode.new(nil, val[0], val[1]) }
+  | Expression "." IDEN
+    Arguments               { result = CallNode.new(val[0], val[2], val[3]) }
+;
+
+Arguments:
+    "(" ")"                       { result = [] }
+  | "(" ArgList ")"               { result = val[1] }
+;
+
+ArgList:
+    Expression                    { result = val }
+  | ArgList "," Expression        { result = val[0] << val[2] }
 ;
 
 Terminator:

@@ -11,7 +11,7 @@ require 'racc/parser.rb'
 
 class Parser < Racc::Parser
 
-module_eval(<<'...end grammar.y.rb/module_eval...', 'grammar.y.rb', 36)
+module_eval(<<'...end grammar.y.rb/module_eval...', 'grammar.y.rb', 62)
   def parse(code, show_tokens=false)
     @tokens = Lexer.new.tokenize(code)
     puts @tokens.inspect if show_tokens
@@ -32,55 +32,74 @@ module_eval(<<'...end grammar.y.rb/module_eval...', 'grammar.y.rb', 36)
 ##### State transition tables begin ###
 
 racc_action_table = [
-     6,     7,     5,     8,     9,     6,     7,    16,     8,     9,
-     6,     7,    12,     8,     9,     6,     7,    10,     8,     9,
-     6,     7,    19,     8,     9,    14 ]
+     6,     8,    17,     9,     6,     8,    14,     9,     6,     8,
+     5,     9,    10,    24,     6,     8,    10,     9,     6,     8,
+    10,     9,     6,     8,    14,     9,    10,    14,     6,     8,
+    10,     9,    13,    27,    10,    30,    20,    29,    18,    14,
+    10,    17,    14,    26,    11,    22,    14,    14 ]
 
 racc_action_check = [
-     0,     0,     0,     0,     0,    14,    14,    10,    14,    14,
-    11,    11,     2,    11,    11,     5,     5,     1,     5,     5,
-     9,     9,    15,     9,     9,     8 ]
+    17,    17,     8,    17,    26,    26,     3,    26,     0,     0,
+     0,     0,    17,    17,    30,    30,    26,    30,     5,     5,
+     0,     5,    12,    12,    19,    12,    30,    15,    10,    10,
+     5,    10,     2,    19,    12,    25,    11,    25,     9,    21,
+    10,    22,    23,    18,     1,    14,    31,    32 ]
 
 racc_action_pointer = [
-    -2,    17,     8,   nil,   nil,    13,   nil,   nil,    22,    18,
-     7,     8,   nil,   nil,     3,    15,   nil,   nil,   nil,   nil ]
+     6,    44,    28,     0,   nil,    16,   nil,   nil,   -12,    35,
+    26,    36,    20,   nil,    42,    21,   nil,    -2,    31,    18,
+   nil,    33,    27,    36,   nil,    22,     2,   nil,   nil,   nil,
+    12,    40,    41 ]
 
 racc_action_default = [
-    -1,   -13,    -2,    -3,    -6,   -12,    -8,    -9,   -13,   -13,
-   -13,    -5,   -12,    -7,   -13,   -13,    20,    -4,   -10,   -11 ]
+    -1,   -20,    -2,    -3,    -6,   -19,    -8,    -9,   -10,   -20,
+   -20,   -20,    -5,   -19,   -20,    -7,   -13,   -20,   -20,   -20,
+    33,    -4,   -20,   -17,   -15,   -20,   -20,   -12,   -14,   -16,
+   -20,   -11,   -18 ]
 
 racc_goto_table = [
-     3,     4,     2,    11,     1,    13,   nil,   nil,   nil,    15,
-   nil,    17,   nil,   nil,    18 ]
+     3,    16,     4,     2,    12,    15,    25,     1,   nil,   nil,
+    19,   nil,    21,   nil,   nil,    28,   nil,    23,   nil,   nil,
+   nil,   nil,   nil,   nil,   nil,   nil,    31,   nil,   nil,   nil,
+    32 ]
 
 racc_goto_check = [
-     3,     4,     2,     4,     1,     3,   nil,   nil,   nil,     3,
-   nil,     3,   nil,   nil,     3 ]
+     3,     6,     4,     2,     4,     3,     7,     1,   nil,   nil,
+     3,   nil,     3,   nil,   nil,     6,   nil,     3,   nil,   nil,
+   nil,   nil,   nil,   nil,   nil,   nil,     3,   nil,   nil,   nil,
+     3 ]
 
 racc_goto_pointer = [
-   nil,     4,     2,     0,     1 ]
+   nil,     7,     3,     0,     2,   nil,    -7,   -11 ]
 
 racc_goto_default = [
-   nil,   nil,   nil,   nil,   nil ]
+   nil,   nil,   nil,   nil,   nil,     7,   nil,   nil ]
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  0, 9, :_reduce_1,
-  1, 9, :_reduce_2,
-  1, 10, :_reduce_3,
-  3, 10, :_reduce_4,
-  2, 10, :_reduce_5,
-  1, 10, :_reduce_6,
-  2, 10, :_reduce_7,
-  1, 11, :_reduce_8,
-  1, 11, :_reduce_9,
-  3, 11, :_reduce_10,
-  3, 11, :_reduce_11,
-  1, 12, :_reduce_12 ]
+  0, 17, :_reduce_1,
+  1, 17, :_reduce_2,
+  1, 18, :_reduce_3,
+  3, 18, :_reduce_4,
+  2, 18, :_reduce_5,
+  1, 18, :_reduce_6,
+  2, 18, :_reduce_7,
+  1, 19, :_reduce_8,
+  1, 19, :_reduce_none,
+  1, 19, :_reduce_10,
+  4, 19, :_reduce_11,
+  3, 19, :_reduce_12,
+  2, 21, :_reduce_13,
+  4, 21, :_reduce_14,
+  2, 22, :_reduce_15,
+  3, 22, :_reduce_16,
+  1, 23, :_reduce_17,
+  3, 23, :_reduce_18,
+  1, 20, :_reduce_19 ]
 
-racc_reduce_n = 13
+racc_reduce_n = 20
 
-racc_shift_n = 20
+racc_shift_n = 33
 
 racc_token_table = {
   false => 0,
@@ -89,10 +108,18 @@ racc_token_table = {
   :IDEN => 3,
   :NEWLINE => 4,
   :DEFINE => 5,
-  "(" => 6,
-  ")" => 7 }
+  "." => 6,
+  "!" => 7,
+  "*" => 8,
+  "/" => 9,
+  "+" => 10,
+  "-" => 11,
+  "=" => 12,
+  "," => 13,
+  "(" => 14,
+  ")" => 15 }
 
-racc_nt_base = 8
+racc_nt_base = 16
 
 racc_use_result_var = true
 
@@ -119,13 +146,24 @@ Racc_token_to_s_table = [
   "IDEN",
   "NEWLINE",
   "DEFINE",
+  "\".\"",
+  "\"!\"",
+  "\"*\"",
+  "\"/\"",
+  "\"+\"",
+  "\"-\"",
+  "\"=\"",
+  "\",\"",
   "\"(\"",
   "\")\"",
   "$start",
   "Program",
   "Expressions",
   "Expression",
-  "Terminator" ]
+  "Terminator",
+  "Call",
+  "Arguments",
+  "ArgList" ]
 
 Racc_debug_parser = false
 
@@ -133,85 +171,129 @@ Racc_debug_parser = false
 
 # reduce 0 omitted
 
-module_eval(<<'.,.,', 'grammar.y.rb', 7)
+module_eval(<<'.,.,', 'grammar.y.rb', 16)
   def _reduce_1(val, _values, result)
      result = Nodes.new([])
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 8)
+module_eval(<<'.,.,', 'grammar.y.rb', 17)
   def _reduce_2(val, _values, result)
      result = val[0]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 12)
+module_eval(<<'.,.,', 'grammar.y.rb', 21)
   def _reduce_3(val, _values, result)
      result = Nodes.new(val)
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 13)
+module_eval(<<'.,.,', 'grammar.y.rb', 22)
   def _reduce_4(val, _values, result)
      result = val[0] << val[2]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 14)
+module_eval(<<'.,.,', 'grammar.y.rb', 23)
   def _reduce_5(val, _values, result)
      result = val[0]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 15)
+module_eval(<<'.,.,', 'grammar.y.rb', 24)
   def _reduce_6(val, _values, result)
      result = Nodes.new([])
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 16)
+module_eval(<<'.,.,', 'grammar.y.rb', 25)
   def _reduce_7(val, _values, result)
      result = Nodes.new([val[1]])
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 20)
+module_eval(<<'.,.,', 'grammar.y.rb', 29)
   def _reduce_8(val, _values, result)
      result = IntegerNode.new(val[0].to_i)
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 21)
-  def _reduce_9(val, _values, result)
+# reduce 9 omitted
+
+module_eval(<<'.,.,', 'grammar.y.rb', 31)
+  def _reduce_10(val, _values, result)
      result = VarAccessNode.new(val[0])
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 22)
-  def _reduce_10(val, _values, result)
-     result = VarAssignNode.new(val[1], val[2])
+module_eval(<<'.,.,', 'grammar.y.rb', 32)
+  def _reduce_11(val, _values, result)
+     result = VarAssignNode.new(val[1], val[3])
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 23)
-  def _reduce_11(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y.rb', 33)
+  def _reduce_12(val, _values, result)
      result = val[1]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 27)
-  def _reduce_12(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y.rb', 37)
+  def _reduce_13(val, _values, result)
+     result = CallNode.new(nil, val[0], val[1])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y.rb', 39)
+  def _reduce_14(val, _values, result)
+     result = CallNode.new(val[0], val[2], val[3])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y.rb', 43)
+  def _reduce_15(val, _values, result)
+     result = []
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y.rb', 44)
+  def _reduce_16(val, _values, result)
+     result = val[1]
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y.rb', 48)
+  def _reduce_17(val, _values, result)
+     result = val
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y.rb', 49)
+  def _reduce_18(val, _values, result)
+     result = val[0] << val[2]
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y.rb', 53)
+  def _reduce_19(val, _values, result)
      result = val[0]
     result
   end

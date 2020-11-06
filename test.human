@@ -1,2 +1,2 @@
-define a 5
-a
+define a = 5
+print(a)
