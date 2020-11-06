@@ -23,6 +23,13 @@ end
 
 VarAccessNode = Struct.new(:name) do
   def eval(ctx)
-    ctx.locals[name]
+    res = ctx.locals[name]
+    res || $constants['nil']
+  end
+end
+
+VarAssignNode = Struct.new(:name, :value) do
+  def eval(ctx)
+    ctx.locals[name] = value.eval(ctx)
   end
 end

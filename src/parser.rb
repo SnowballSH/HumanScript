@@ -11,7 +11,7 @@ require 'racc/parser.rb'
 
 class Parser < Racc::Parser
 
-module_eval(<<'...end grammar.y.rb/module_eval...', 'grammar.y.rb', 35)
+module_eval(<<'...end grammar.y.rb/module_eval...', 'grammar.y.rb', 36)
   def parse(code, show_tokens=false)
     @tokens = Lexer.new.tokenize(code)
     puts @tokens.inspect if show_tokens
@@ -32,28 +32,30 @@ module_eval(<<'...end grammar.y.rb/module_eval...', 'grammar.y.rb', 35)
 ##### State transition tables begin ###
 
 racc_action_table = [
-     6,     7,    14,     8,     6,     7,    11,     8,     6,     7,
-    16,     8,     6,     7,     5,     8,     9 ]
+     6,     7,     5,     8,     9,     6,     7,    16,     8,     9,
+     6,     7,    12,     8,     9,     6,     7,    10,     8,     9,
+     6,     7,    19,     8,     9,    14 ]
 
 racc_action_check = [
-    10,    10,     9,    10,     8,     8,     2,     8,     5,     5,
-    13,     5,     0,     0,     0,     0,     1 ]
+     0,     0,     0,     0,     0,    14,    14,    10,    14,    14,
+    11,    11,     2,    11,    11,     5,     5,     1,     5,     5,
+     9,     9,    15,     9,     9,     8 ]
 
 racc_action_pointer = [
-    10,    16,     2,   nil,   nil,     6,   nil,   nil,     2,     2,
-    -2,   nil,   nil,     4,   nil,   nil,   nil ]
+    -2,    17,     8,   nil,   nil,    13,   nil,   nil,    22,    18,
+     7,     8,   nil,   nil,     3,    15,   nil,   nil,   nil,   nil ]
 
 racc_action_default = [
-    -1,   -12,    -2,    -3,    -6,   -11,    -8,    -9,   -12,   -12,
-    -5,   -11,    -7,   -12,    17,    -4,   -10 ]
+    -1,   -13,    -2,    -3,    -6,   -12,    -8,    -9,   -13,   -13,
+   -13,    -5,   -12,    -7,   -13,   -13,    20,    -4,   -10,   -11 ]
 
 racc_goto_table = [
-     3,     4,     2,    10,     1,    12,   nil,   nil,    13,   nil,
-    15 ]
+     3,     4,     2,    11,     1,    13,   nil,   nil,   nil,    15,
+   nil,    17,   nil,   nil,    18 ]
 
 racc_goto_check = [
-     3,     4,     2,     4,     1,     3,   nil,   nil,     3,   nil,
-     3 ]
+     3,     4,     2,     4,     1,     3,   nil,   nil,   nil,     3,
+   nil,     3,   nil,   nil,     3 ]
 
 racc_goto_pointer = [
    nil,     4,     2,     0,     1 ]
@@ -63,21 +65,22 @@ racc_goto_default = [
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  0, 8, :_reduce_1,
-  1, 8, :_reduce_2,
-  1, 9, :_reduce_3,
-  3, 9, :_reduce_4,
-  2, 9, :_reduce_5,
-  1, 9, :_reduce_6,
-  2, 9, :_reduce_7,
-  1, 10, :_reduce_8,
-  1, 10, :_reduce_9,
-  3, 10, :_reduce_10,
-  1, 11, :_reduce_11 ]
+  0, 9, :_reduce_1,
+  1, 9, :_reduce_2,
+  1, 10, :_reduce_3,
+  3, 10, :_reduce_4,
+  2, 10, :_reduce_5,
+  1, 10, :_reduce_6,
+  2, 10, :_reduce_7,
+  1, 11, :_reduce_8,
+  1, 11, :_reduce_9,
+  3, 11, :_reduce_10,
+  3, 11, :_reduce_11,
+  1, 12, :_reduce_12 ]
 
-racc_reduce_n = 12
+racc_reduce_n = 13
 
-racc_shift_n = 17
+racc_shift_n = 20
 
 racc_token_table = {
   false => 0,
@@ -85,10 +88,11 @@ racc_token_table = {
   :INTEGER => 2,
   :IDEN => 3,
   :NEWLINE => 4,
-  "(" => 5,
-  ")" => 6 }
+  :DEFINE => 5,
+  "(" => 6,
+  ")" => 7 }
 
-racc_nt_base = 7
+racc_nt_base = 8
 
 racc_use_result_var = true
 
@@ -114,6 +118,7 @@ Racc_token_to_s_table = [
   "INTEGER",
   "IDEN",
   "NEWLINE",
+  "DEFINE",
   "\"(\"",
   "\")\"",
   "$start",
@@ -193,13 +198,20 @@ module_eval(<<'.,.,', 'grammar.y.rb', 21)
 
 module_eval(<<'.,.,', 'grammar.y.rb', 22)
   def _reduce_10(val, _values, result)
+     result = VarAssignNode.new(val[1], val[2])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y.rb', 23)
+  def _reduce_11(val, _values, result)
      result = val[1]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y.rb', 26)
-  def _reduce_11(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y.rb', 27)
+  def _reduce_12(val, _values, result)
      result = val[0]
     result
   end

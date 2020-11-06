@@ -1,6 +1,6 @@
 class Parser
 
-token INTEGER IDEN NEWLINE
+token INTEGER IDEN NEWLINE DEFINE
 
 rule
 
@@ -18,9 +18,10 @@ Expressions:
 ;
 
 Expression:
-  INTEGER                { result = IntegerNode.new(val[0].to_i) }
-  | IDEN                   { result = VarAccessNode.new(val[0]) }
-  | '(' Expression ')'   { result = val[1] }
+  INTEGER                       { result = IntegerNode.new(val[0].to_i) }
+  | IDEN                        { result = VarAccessNode.new(val[0]) }
+  | DEFINE IDEN Expression      { result = VarAssignNode.new(val[1], val[2]) }
+  | '(' Expression ')'          { result = val[1] }
 ;
 
 Terminator:
