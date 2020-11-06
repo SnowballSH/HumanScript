@@ -6,7 +6,7 @@ macro
   DEFINE        define
   AS            as
   
-  IDEN          [a-z][\w]*
+  IDEN          [a-zA-Z][\w]*
   NUM           [\d]+
 
 rule

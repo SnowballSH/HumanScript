@@ -21,9 +21,16 @@ IntegerNode = Struct.new(:value) do
   end
 end
 
-VarAccessNode = Struct.new(:name) do
+VarAccessNode = Struct.new(:receiver, :name) do
   def eval(ctx)
-    res = ctx.locals[name]
+    value = if receiver
+              receiver.eval(ctx)
+            else
+              ctx.current_self
+            end
+    res = value.runtime_class.runtime_vars[name]
+    res ||= ctx.locals[name]
+    res ||= $constants[name]
     res || $constants['nil']
   end
 end
