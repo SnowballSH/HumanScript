@@ -1,4 +1,4 @@
 define a as 5
 define x20 as 20
-print (a )
-print (x20  )
+print (a + 3)
+print (x20 / a)

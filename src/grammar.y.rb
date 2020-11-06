@@ -28,10 +28,18 @@ Expressions:
 
 Expression:
     INTEGER                     { result = IntegerNode.new(val[0].to_i) }
+  | Operation
   | Call
   | Get
   | DEFINE IDEN AS Expression   { result = VarAssignNode.new(val[1], val[3]) }
   | '(' Expression ')'          { result = val[1] }
+;
+
+Operation:
+    Expression '+'  Expression  { result = CallNode.new(val[0], val[1], [val[2]]) }
+  | Expression '-'  Expression  { result = CallNode.new(val[0], val[1], [val[2]]) }
+  | Expression '*'  Expression  { result = CallNode.new(val[0], val[1], [val[2]]) }
+  | Expression '/'  Expression  { result = CallNode.new(val[0], val[1], [val[2]]) }
 ;
 
 Get:

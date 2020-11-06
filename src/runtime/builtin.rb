@@ -21,3 +21,23 @@ $constants['Object'].def :print do |_receiver, arguments|
   puts arguments.first.value
   $constants['nil']
 end
+
+$constants['Number'].def :+ do |receiver, arguments|
+  result = receiver.value + arguments.first.value
+  $constants['Number'].new_with_value(result)
+end
+
+$constants['Number'].def :- do |receiver, arguments|
+  result = receiver.value - arguments.first.value
+  $constants['Number'].new_with_value(result)
+end
+
+$constants['Number'].def :* do |receiver, arguments|
+  result = receiver.value * arguments.first.value
+  $constants['Number'].new_with_value(result)
+end
+
+$constants['Number'].def :/ do |receiver, arguments|
+  result = receiver.value / arguments.first.value
+  $constants['Number'].new_with_value(result)
+end
