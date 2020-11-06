@@ -66,6 +66,9 @@ class Lexer < Racc::Parser
                   when (text = @ss.scan(/define/))
                      action { [:DEFINE, text] }
 
+                  when (text = @ss.scan(/as/))
+                     action { [:AS, text] }
+
                   when (text = @ss.scan(/[\d]+/))
                      action { [:INTEGER, text.to_i] }
 

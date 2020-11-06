@@ -4,6 +4,7 @@ macro
   NEWLINE       [\r\n]+
 
   DEFINE        define
+  AS            as
   
   IDEN          [a-z][\w]*
   NUM           [\d]+
@@ -12,6 +13,7 @@ rule
   {BLANK}       # no action
   {NEWLINE}     { [:NEWLINE, text] }
   {DEFINE}      { [:DEFINE, text] }
+  {AS}          { [:AS, text] }
   {NUM}         { [:INTEGER, text.to_i] }
   {IDEN}        { [:IDEN, text.chomp] }
   .             { [text, text] }

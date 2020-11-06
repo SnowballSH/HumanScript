@@ -1,2 +1,4 @@
 define a = 5
-print(a)
+define x20 = 20
+print (a )
+print (x20  )

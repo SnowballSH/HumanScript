@@ -1,13 +1,13 @@
 class Parser
 
-token INTEGER IDEN NEWLINE DEFINE
+token INTEGER IDEN NEWLINE DEFINE AS
 
 prechigh
   left  '.'
   right '!'
   left  '*' '/'
   left  '+' '-'
-  right '='
+  right '=' AS
   left  ','
 preclow
 
@@ -30,7 +30,7 @@ Expression:
     INTEGER                     { result = IntegerNode.new(val[0].to_i) }
   | Call
   | IDEN                        { result = VarAccessNode.new(val[0]) }
-  | DEFINE IDEN '=' Expression  { result = VarAssignNode.new(val[1], val[3]) }
+  | DEFINE IDEN AS Expression  { result = VarAssignNode.new(val[1], val[3]) }
   | '(' Expression ')'          { result = val[1] }
 ;
 
