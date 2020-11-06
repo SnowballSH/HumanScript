@@ -53,3 +53,11 @@ CallNode = Struct.new(:receiver, :name, :args) do
     value.call(name, evaluated_arguments)
   end
 end
+
+DefNode = Struct.new(:name, :params, :body) do
+  def eval(context)
+    method = $constants['Function'].new_with_value(HMethod.new(params, body))
+    method.callable = true
+    context.current_class.runtime_vars[name] = method
+  end
+end

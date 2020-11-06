@@ -1,6 +1,6 @@
 class Parser
 
-token INTEGER IDEN NEWLINE DEFINE AS
+token INTEGER IDEN NEWLINE DEFINE DEF END AS
 
 prechigh
   left  '.'
@@ -30,6 +30,7 @@ Expression:
     INTEGER                     { result = IntegerNode.new(val[0].to_i) }
   | Operation
   | Call
+  | Def
   | Get
   | Set
   | '(' Expression ')'          { result = val[1] }
@@ -49,7 +50,7 @@ Get:
 
 Set:
     DEFINE IDEN AS Expression   { result = VarAssignNode.new(val[1], val[3]) }
-  | IDEN '=' Expression   { result = VarAssignNode.new(val[0], val[2]) }
+  | IDEN '=' Expression         { result = VarAssignNode.new(val[0], val[2]) }
 ;
 
 Call:
@@ -68,8 +69,25 @@ ArgList:
   | ArgList "," Expression        { result = val[0] << val[2] }
 ;
 
+Block:
+    Terminator Expressions END    { result = val[1] }
+;
+
+Def:
+    DEF IDEN Block                { result = DefNode.new(val[1], [], val[2]) }
+  | DEF IDEN
+      "(" ParamList ")" Block     { result = DefNode.new(val[1], val[3], val[5]) }
+;
+
+ParamList:
+    /* nothing */                 { result = [] }
+  | IDEN                          { result = val }
+  | ParamList "," IDEN            { result = val[0] << val[2] }
+;
+
 Terminator:
-  NEWLINE                { result = val[0] }
+    NEWLINE                { result = val[0] }
+  | ';'                    { result = val[0] }
 ;
 
 ---- header

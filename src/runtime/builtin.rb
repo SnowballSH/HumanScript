@@ -13,31 +13,40 @@ $constants['nil'] = $constants['NilClass'].new_with_value(nil)
 root_self = $constants['Object'].new
 RootContext = Context.new(root_self)
 
-$constants['Class'].def :new do |receiver, _arguments|
+$constants['Class'].def :new, 0 do |receiver, _arguments|
   receiver.new
 end
 
-$constants['Object'].def :print do |_receiver, arguments|
-  puts arguments.first.value
+############# Object #############
+
+$constants['Object'].def :pln, -1 do |_receiver, arguments|
+  puts(*arguments.map { |x| x.value }.join(' '))
   $constants['nil']
 end
 
-$constants['Number'].def :+ do |receiver, arguments|
+$constants['Object'].def :print, -1 do |_receiver, arguments|
+  print(*arguments.map { |x| x.value }.join(' '))
+  $constants['nil']
+end
+
+############# Object #############
+
+$constants['Number'].def :+, 1 do |receiver, arguments|
   result = receiver.value + arguments.first.value
   $constants['Number'].new_with_value(result)
 end
 
-$constants['Number'].def :- do |receiver, arguments|
+$constants['Number'].def :-, 1 do |receiver, arguments|
   result = receiver.value - arguments.first.value
   $constants['Number'].new_with_value(result)
 end
 
-$constants['Number'].def :* do |receiver, arguments|
+$constants['Number'].def :*, 1 do |receiver, arguments|
   result = receiver.value * arguments.first.value
   $constants['Number'].new_with_value(result)
 end
 
-$constants['Number'].def :/ do |receiver, arguments|
+$constants['Number'].def :/, 1 do |receiver, arguments|
   result = receiver.value / arguments.first.value
   $constants['Number'].new_with_value(result)
 end

@@ -7,6 +7,8 @@ macro
 
   DEFINE        define
   AS            as
+  DEF           def
+  END           end
   
   IDEN          [a-zA-Z][\w]*
   NUM           [\d]+
@@ -17,6 +19,8 @@ rule
   {SHORTCOMMENT}
   {NEWLINE}     { [:NEWLINE, text] }
   {DEFINE}      { [:DEFINE, text] }
+  {DEF}         { [:DEF, text] }
+  {END}         { [:END, text] }
   {AS}          { [:AS, text] }
   {NUM}         { [:INTEGER, text.to_i] }
   {IDEN}        { [:IDEN, text.chomp] }

@@ -1,9 +1,10 @@
-define a as 5
-x20 = 20
---[
-define ... as ...
-is equal to
-... = ...
-]
-print(a + 3)  -- print a plus 3
-print(x20 / a)
+def a
+  pln(3)
+end
+
+def b(x, y)
+  pln(x + y, x - y, x * y, x / y)
+end
+
+a()  -- 3
+b(3, 4)  -- 7 -1 12 0

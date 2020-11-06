@@ -28,8 +28,8 @@ class HClass < HObject
     method.value
   end
 
-  def def(name, &block)
-    x = $constants['Function'].new_with_value(block)
+  def def(name, arg_amount, &block)
+    x = $constants['Function'].new_with_value(HNativeMethod.new(arg_amount, block))
     x.callable = true
     @runtime_vars[name.to_s] = x
   end
@@ -54,5 +54,47 @@ class Context
     @locals = {}
     @current_self = current_self
     @current_class = current_class
+  end
+end
+
+class HMethod
+  attr_accessor :params, :callable
+
+  def initialize(params, body)
+    @params = params
+    @body = body
+    @callable = false
+  end
+
+  def call(receiver, arguments)
+    context = Context.new(receiver)
+
+    if @params.size != arguments.size
+      raise "Mismatched amount of arguments: Expected #{@params.size}, got #{arguments.size}"
+    end
+
+    @params.each_with_index do |param, index|
+      context.locals[param] = arguments[index]
+    end
+
+    @body.eval(context)
+  end
+end
+
+class HNativeMethod
+  attr_accessor :param_amount, :callable
+
+  def initialize(param_amount, body)
+    @param_amount = param_amount
+    @body = body
+    @callable = true
+  end
+
+  def call(receiver, arguments)
+    if @param_amount != arguments.size && @param_amount != -1
+      raise "Mismatched amount of arguments: Expected #{@param_amount}, got #{arguments.size}"
+    end
+
+    @body.call(receiver, arguments)
   end
 end
