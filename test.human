@@ -1,4 +1,9 @@
 define a as 5
-define x20 as 20
-print (a + 3)
-print (x20 / a)
+x20 = 20
+--[
+define ... as ...
+is equal to
+... = ...
+]
+print(a + 3)  -- print a plus 3
+print(x20 / a)

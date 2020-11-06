@@ -2,6 +2,8 @@ class Lexer
 macro
   BLANK         [\ \t\b]+
   NEWLINE       [\r\n]+
+  LONGCOMMENT   --\[(?:[^\]\]]|)*\]
+  SHORTCOMMENT  --.*
 
   DEFINE        define
   AS            as
@@ -11,6 +13,8 @@ macro
 
 rule
   {BLANK}       # no action
+  {LONGCOMMENT}
+  {SHORTCOMMENT}
   {NEWLINE}     { [:NEWLINE, text] }
   {DEFINE}      { [:DEFINE, text] }
   {AS}          { [:AS, text] }

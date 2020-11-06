@@ -31,7 +31,7 @@ Expression:
   | Operation
   | Call
   | Get
-  | DEFINE IDEN AS Expression   { result = VarAssignNode.new(val[1], val[3]) }
+  | Set
   | '(' Expression ')'          { result = val[1] }
 ;
 
@@ -45,6 +45,11 @@ Operation:
 Get:
     IDEN                        { result = VarAccessNode.new(nil, val[0]) }
   | Expression "." IDEN         { result = VarAccessNode.new(val[0], val[2]) }
+;
+
+Set:
+    DEFINE IDEN AS Expression   { result = VarAssignNode.new(val[1], val[3]) }
+  | IDEN '=' Expression   { result = VarAssignNode.new(val[0], val[2]) }
 ;
 
 Call:

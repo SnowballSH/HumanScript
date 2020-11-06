@@ -60,6 +60,12 @@ class Lexer < Racc::Parser
                   when (text = @ss.scan(/[ \t\b]+/))
                     ;
 
+                  when (text = @ss.scan(/--\[(?:[^\]\]]|)*\]/))
+                    ;
+
+                  when (text = @ss.scan(/--.*/))
+                    ;
+
                   when (text = @ss.scan(/[\r\n]+/))
                      action { [:NEWLINE, text] }
 
