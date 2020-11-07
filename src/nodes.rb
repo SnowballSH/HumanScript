@@ -23,11 +23,21 @@ end
 
 VarAccessNode = Struct.new(:receiver, :name) do
   def eval(ctx)
-    value = if receiver
-              receiver.eval(ctx)
-            else
-              ctx.current_self
-            end
+    value = receiver ? receiver.eval(ctx) : ctx.current_self
+    if value.runtime_class.runtime_vars[name] && value.runtime_class.runtime_vars[name].callable
+      value.call(name, [])
+    else
+      res = value.runtime_class.runtime_vars[name]
+      res ||= ctx.locals[name]
+      res ||= $constants[name]
+      res || $constants['nil']
+    end
+  end
+end
+
+StrictVarAccessNode = Struct.new(:receiver, :name) do
+  def eval(ctx)
+    value = receiver ? receiver.eval(ctx) : ctx.current_self
     res = value.runtime_class.runtime_vars[name]
     res ||= ctx.locals[name]
     res ||= $constants[name]
@@ -59,5 +69,21 @@ DefNode = Struct.new(:name, :params, :body) do
     method = $constants['Function'].new_with_value(HMethod.new(params, body))
     method.callable = true
     context.current_class.runtime_vars[name] = method
+  end
+end
+
+ClassNode = Struct.new(:name, :body) do
+  def eval(context)
+    cls = $constants[name]
+
+    unless cls
+      cls = HClass.new(context.current_class)
+      $constants[name] = cls
+    end
+
+    class_context = Context.new(cls, cls)
+    body.eval(class_context)
+
+    cls
   end
 end

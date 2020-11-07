@@ -1,10 +1,9 @@
 class Parser
 
-token INTEGER IDEN NEWLINE DEFINE DEF END AS
+token INTEGER IDEN NEWLINE DEFINE DEF END AS CLASS
 
 prechigh
   left  '.'
-  right '!'
   left  '*' '/'
   left  '+' '-'
   right '=' AS
@@ -33,6 +32,7 @@ Expression:
   | Def
   | Get
   | Set
+  | Class
   | '(' Expression ')'          { result = val[1] }
 ;
 
@@ -46,6 +46,8 @@ Operation:
 Get:
     IDEN                        { result = VarAccessNode.new(nil, val[0]) }
   | Expression "." IDEN         { result = VarAccessNode.new(val[0], val[2]) }
+  | "&" IDEN                    { result = StrictVarAccessNode.new(nil, val[1]) }
+  | Expression "." "&" IDEN     { result = StrictVarAccessNode.new(val[0], val[3]) }
 ;
 
 Set:
@@ -77,6 +79,10 @@ Def:
     DEF IDEN Block                { result = DefNode.new(val[1], [], val[2]) }
   | DEF IDEN
       "(" ParamList ")" Block     { result = DefNode.new(val[1], val[3], val[5]) }
+;
+
+Class:
+    CLASS IDEN Block              { result = ClassNode.new(val[1], val[2]) }
 ;
 
 ParamList:

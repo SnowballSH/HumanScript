@@ -15,17 +15,20 @@ end
 class HClass < HObject
   attr_reader :runtime_vars
 
-  def initialize
+  def initialize(superclass = nil)
     @runtime_vars = {}
     @runtime_class = $constants['Class']
+    @runtime_superclass = superclass
   end
 
   def lookup(method_name)
     method = @runtime_vars[method_name]
+    method = method.value if method
+    method = @runtime_superclass.lookup(method_name) if method.nil? && @runtime_superclass
     raise "Method not found: #{method_name}" if method.nil?
     raise "#{method_name} is not callable" unless method.callable
 
-    method.value
+    method
   end
 
   def def(name, arg_amount, &block)
@@ -63,7 +66,7 @@ class HMethod
   def initialize(params, body)
     @params = params
     @body = body
-    @callable = false
+    @callable = true
   end
 
   def call(receiver, arguments)
