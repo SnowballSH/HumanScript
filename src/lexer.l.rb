@@ -12,7 +12,7 @@ macro
   CLASS         class
   
   IDEN          [a-zA-Z][\w]*
-  NUM           [\d]+
+  NUM           [-]?[\d]+
 
 rule
   {BLANK}       # no action
