@@ -388,7 +388,7 @@ module_eval(<<'.,.,', 'grammar.y.rb', 49)
 
 module_eval(<<'.,.,', 'grammar.y.rb', 53)
   def _reduce_24(val, _values, result)
-     result = VarAssignNode.new(val[1], val[3])
+     result = ConstantAssignNode.new(val[1], val[3])
     result
   end
 .,.,

@@ -1,9 +1,13 @@
 class HObject
   attr_accessor :runtime_class, :value, :callable
 
-  def initialize(runtime_class, value = self)
+  def initialize(runtime_class, value = self, type = nil)
     @runtime_class = runtime_class
-    @value = value
+    @value = if type.nil?
+               value
+             else
+               value.nil? ? Prim[type.to_sym] : value
+             end
     @callable = false
   end
 
@@ -13,12 +17,14 @@ class HObject
 end
 
 class HClass < HObject
-  attr_reader :runtime_vars
+  attr_reader :runtime_vars, :type, :runtime_superclass, :value
 
-  def initialize(superclass = nil)
+  def initialize(superclass = nil, type = nil)
     @runtime_vars = {}
     @runtime_class = $constants['Class']
     @runtime_superclass = superclass
+    @type = type
+    @value = "Type '#{type}'"
   end
 
   def lookup(method_name)
@@ -42,11 +48,11 @@ class HClass < HObject
   end
 
   def new
-    HObject.new(self)
+    HObject.new(self, nil, @type)
   end
 
   def new_with_value(value)
-    HObject.new(self, value)
+    HObject.new(self, value, @type)
   end
 end
 
@@ -101,3 +107,5 @@ class HNativeMethod
     @body.call(receiver, arguments)
   end
 end
+
+require_relative './prim.rb'

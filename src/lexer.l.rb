@@ -7,7 +7,7 @@ macro
 
   KEYWORD       define|as|def|end|class
   
-  IDEN          [a-zA-Z][\w]*
+  IDEN          [a-zA-Z_][\w]*
   NUM           [-]?[\d]+
 
 rule

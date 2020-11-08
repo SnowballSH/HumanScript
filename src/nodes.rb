@@ -47,7 +47,13 @@ end
 
 VarAssignNode = Struct.new(:name, :value) do
   def eval(ctx)
-    ctx.locals[name] = value.eval(ctx)
+    ctx.locals[name] = value.eval(ctx) unless name[0] == '_'
+  end
+end
+
+ConstantAssignNode = Struct.new(:name, :value) do
+  def eval(ctx)
+    $constants[name] = value.eval(ctx)
   end
 end
 

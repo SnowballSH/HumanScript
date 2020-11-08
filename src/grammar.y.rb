@@ -51,7 +51,7 @@ Get:
 ;
 
 Set:
-    DEFINE IDEN AS Expression   { result = VarAssignNode.new(val[1], val[3]) }
+    DEFINE IDEN AS Expression   { result = ConstantAssignNode.new(val[1], val[3]) }
   | IDEN '=' Expression         { result = VarAssignNode.new(val[0], val[2]) }
 ;
 
