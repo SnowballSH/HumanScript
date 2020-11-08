@@ -100,7 +100,7 @@ class HNativeMethod
   end
 
   def call(receiver, arguments)
-    if @param_amount != arguments.size && @param_amount != -1
+    if @param_amount > arguments.size && @param_amount != -1
       raise "Mismatched amount of arguments: Expected #{@param_amount}, got #{arguments.size}"
     end
 

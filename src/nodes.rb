@@ -30,7 +30,9 @@ VarAccessNode = Struct.new(:receiver, :name) do
       res = value.runtime_class.runtime_vars[name]
       res ||= ctx.locals[name]
       res ||= $constants[name]
-      res || $constants['nil']
+      raise "undefined local or method '#{name}'" unless res
+
+      res
     end
   end
 end
@@ -41,7 +43,9 @@ StrictVarAccessNode = Struct.new(:receiver, :name) do
     res = value.runtime_class.runtime_vars[name]
     res ||= ctx.locals[name]
     res ||= $constants[name]
-    res || $constants['nil']
+    raise "undefined local '#{name}'" unless res
+
+    res
   end
 end
 

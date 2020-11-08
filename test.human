@@ -1,1 +1,10 @@
-pln
+class X
+  well = 1
+  def is_well
+    well
+  end
+end
+
+x = X.new
+
+pln(x.is_well)
