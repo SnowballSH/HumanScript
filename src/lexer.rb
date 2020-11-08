@@ -69,20 +69,8 @@ class Lexer < Racc::Parser
                   when (text = @ss.scan(/[\r\n]+/))
                      action { [:NEWLINE, text] }
 
-                  when (text = @ss.scan(/define/))
-                     action { [:DEFINE, text] }
-
-                  when (text = @ss.scan(/def/))
-                     action { [:DEF, text] }
-
-                  when (text = @ss.scan(/end/))
-                     action { [:END, text] }
-
-                  when (text = @ss.scan(/as/))
-                     action { [:AS, text] }
-
-                  when (text = @ss.scan(/class/))
-                     action { [:CLASS, text] }
+                  when (text = @ss.scan(/define|as|def|end|class/))
+                     action { [text.upcase.to_sym, text.chomp] }
 
                   when (text = @ss.scan(/[-]?[\d]+/))
                      action { [:INTEGER, text.to_i] }

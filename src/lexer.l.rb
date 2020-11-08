@@ -5,11 +5,7 @@ macro
   LONGCOMMENT   --\[(?:[^\]\]]|)*\]
   SHORTCOMMENT  --.*
 
-  DEFINE        define
-  AS            as
-  DEF           def
-  END           end
-  CLASS         class
+  KEYWORD       define|as|def|end|class
   
   IDEN          [a-zA-Z][\w]*
   NUM           [-]?[\d]+
@@ -19,11 +15,7 @@ rule
   {LONGCOMMENT}
   {SHORTCOMMENT}
   {NEWLINE}     { [:NEWLINE, text] }
-  {DEFINE}      { [:DEFINE, text] }
-  {DEF}         { [:DEF, text] }
-  {END}         { [:END, text] }
-  {AS}          { [:AS, text] }
-  {CLASS}       { [:CLASS, text] }
+  {KEYWORD}     { [text.upcase.to_sym, text.chomp] }
   {NUM}         { [:INTEGER, text.to_i] }
   {IDEN}        { [:IDEN, text.chomp] }
   .             { [text, text] }
