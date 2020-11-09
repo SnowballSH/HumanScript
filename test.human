@@ -1,10 +1,7 @@
-class X
-  well = 1
-  def is_well
-    well
+x = if nil
+    3
+  else
+    4
   end
-end
 
-x = X.new
-
-pln(x.is_well)
+pln(x)

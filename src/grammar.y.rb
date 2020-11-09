@@ -1,6 +1,7 @@
 class Parser
 
 token INTEGER IDEN NEWLINE DEFINE DEF END AS CLASS
+      IF ELSE
 
 prechigh
   left  '.'
@@ -33,6 +34,7 @@ Expression:
   | Get
   | Set
   | Class
+  | Cond
   | '(' Expression ')'          { result = val[1] }
 ;
 
@@ -89,6 +91,12 @@ ParamList:
     /* nothing */                 { result = [] }
   | IDEN                          { result = val }
   | ParamList "," IDEN            { result = val[0] << val[2] }
+;
+
+Cond:
+    IF Expression Terminator Expressions 
+    Terminator ELSE Block         { result = IfElseNode.new(val[1], val[3], val[6]) }
+  | IF Expression Block           { result = IfNode.new(val[1], val[2]) }
 ;
 
 Terminator:

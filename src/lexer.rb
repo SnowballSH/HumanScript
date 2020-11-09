@@ -69,7 +69,7 @@ class Lexer < Racc::Parser
                   when (text = @ss.scan(/[\r\n]+/))
                      action { [:NEWLINE, text] }
 
-                  when (text = @ss.scan(/define|as|def|end|class/))
+                  when (text = @ss.scan(/define|as|def|end|class|if|else/))
                      action { [text.upcase.to_sym, text.chomp] }
 
                   when (text = @ss.scan(/[-]?[\d]+/))

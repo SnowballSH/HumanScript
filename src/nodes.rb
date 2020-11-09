@@ -51,7 +51,7 @@ end
 
 VarAssignNode = Struct.new(:name, :value) do
   def eval(ctx)
-    ctx.locals[name] = value.eval(ctx) unless name[0] == '_'
+    ctx.current_class.assign(name, value.eval(ctx)) unless name[0] == '_'
   end
 end
 
@@ -84,16 +84,37 @@ end
 
 ClassNode = Struct.new(:name, :body) do
   def eval(context)
-    cls = $constants[name]
+    cls = context.current_class.runtime_vars[name]
+    cls ||= context.locals[name]
+    cls ||= $constants[name]
 
     unless cls
-      cls = HClass.new(context.current_class)
-      $constants[name] = cls
+      cls = HClass.new(context.current_self, 'Class')
+      context.current_class.assign(name, cls)
     end
-
     class_context = Context.new(cls, cls)
     body.eval(class_context)
 
     cls
+  end
+end
+
+IfNode = Struct.new(:cond, :body) do
+  def eval(ctx)
+    if cond.eval(ctx).value
+      body.eval(ctx)
+    else
+      $constants['nil']
+    end
+  end
+end
+
+IfElseNode = Struct.new(:cond, :body, :else_body) do
+  def eval(ctx)
+    if cond.eval(ctx).value
+      body.eval(ctx)
+    else
+      else_body.eval(ctx)
+    end
   end
 end
