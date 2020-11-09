@@ -2,6 +2,8 @@
 
 ## A language for machine, programmers, and everyone.
 
+## You can try out the language on [This repl.it link](https://repl.it/@SnowballSH/HumanScript)
+
 Example:
 
 ```lua
