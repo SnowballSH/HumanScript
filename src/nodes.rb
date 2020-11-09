@@ -89,7 +89,7 @@ ClassNode = Struct.new(:name, :body) do
     cls ||= $constants[name]
 
     unless cls
-      cls = HClass.new(context.current_self, 'Class')
+      cls = HClass.new(context.current_class, 'Class')
       context.current_class.assign(name, cls)
     end
     class_context = Context.new(cls, cls)

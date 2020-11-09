@@ -1,7 +1,7 @@
-x = if nil
-    3
-  else
-    4
+class A
+  def a(x)
+   pln(x)
   end
-
-pln(x)
+end
+a = A.new
+a.a(3)

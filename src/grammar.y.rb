@@ -75,6 +75,7 @@ ArgList:
 
 Block:
     Terminator Expressions END    { result = val[1] }
+  | Terminator END                { result = Nodes.new([]) }
 ;
 
 Def:
