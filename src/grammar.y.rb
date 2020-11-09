@@ -2,11 +2,14 @@ class Parser
 
 token INTEGER IDEN NEWLINE DEFINE DEF END AS CLASS
       IF ELSE
+      POW DBEQ NTEQ GT LT GTEQ LTEQ
 
 prechigh
   left  '.'
-  left  '*' '/'
+  left  POW
+  left  '*' '/' '%'
   left  '+' '-'
+  left  DBEQ NTEQ GT LT GTEQ LTEQ
   right '=' AS
   left  ','
 preclow
@@ -29,6 +32,8 @@ Expressions:
 Expression:
     INTEGER                     { result = IntegerNode.new(val[0].to_i) }
   | Operation
+  | Unary
+  | Comp
   | Call
   | Def
   | Get
@@ -39,10 +44,26 @@ Expression:
 ;
 
 Operation:
-    Expression '+'  Expression  { result = CallNode.new(val[0], val[1], [val[2]]) }
-  | Expression '-'  Expression  { result = CallNode.new(val[0], val[1], [val[2]]) }
-  | Expression '*'  Expression  { result = CallNode.new(val[0], val[1], [val[2]]) }
-  | Expression '/'  Expression  { result = CallNode.new(val[0], val[1], [val[2]]) }
+    Expression POW Expression  { result = CallNode.new(val[0], '__pow', [val[2]]) }
+  | Expression '+' Expression  { result = CallNode.new(val[0], '__add', [val[2]]) }
+  | Expression '-' Expression  { result = CallNode.new(val[0], '__sub', [val[2]]) }
+  | Expression '*' Expression  { result = CallNode.new(val[0], '__mul', [val[2]]) }
+  | Expression '/' Expression  { result = CallNode.new(val[0], '__div', [val[2]]) }
+  | Expression '%' Expression  { result = CallNode.new(val[0], '__mod', [val[2]]) }
+;
+
+Unary:
+    '-' Expression             { result = CallNode.new(val[1], '__neg', []) }
+  | '+' Expression             { result = CallNode.new(val[1], '__pos', []) }
+;
+
+Comp:
+    Expression DBEQ Expression  { result = CallNode.new(val[0], '__eq',   [val[2]]) }
+  | Expression NTEQ Expression  { result = CallNode.new(val[0], '__neq',  [val[2]]) }
+  | Expression GT   Expression  { result = CallNode.new(val[0], '__gt',   [val[2]]) }
+  | Expression LT   Expression  { result = CallNode.new(val[0], '__lt',   [val[2]]) }
+  | Expression GTEQ Expression  { result = CallNode.new(val[0], '__gteq', [val[2]]) }
+  | Expression LTEQ Expression  { result = CallNode.new(val[0], '__lteq', [val[2]]) }
 ;
 
 Get:
@@ -108,6 +129,16 @@ Terminator:
 ---- header
   require "#{File.dirname(__FILE__)}/lexer.rb"
   require "#{File.dirname(__FILE__)}/nodes.rb"
+
+  $REF = {
+    '**' => :POW,
+    '==' => :DBEQ,
+    '!=' => :NTEQ,
+    '<=' => :LTEQ,
+    '>=' => :GTEQ,
+    '<'  => :LT,
+    '>'  => :GT
+  }
 
 ---- inner
   def parse(code, show_tokens=false)

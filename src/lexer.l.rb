@@ -6,9 +6,10 @@ macro
   SHORTCOMMENT  --.*
 
   KEYWORD       define|as|def|end|class|if|else
+  OP            \*\*|==|\!=|>=|<=|>|<
   
   IDEN          [a-zA-Z_][\w]*
-  NUM           [-]?[\d]+
+  NUM           [\d]+
 
 rule
   {BLANK}       # no action
@@ -18,6 +19,7 @@ rule
   {KEYWORD}     { [text.upcase.to_sym, text.chomp] }
   {NUM}         { [:INTEGER, text.to_i] }
   {IDEN}        { [:IDEN, text.chomp] }
+  {OP}          { [$REF[text], text] }
   .             { [text, text] }
 
 inner

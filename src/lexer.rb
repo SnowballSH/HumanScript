@@ -72,11 +72,14 @@ class Lexer < Racc::Parser
                   when (text = @ss.scan(/define|as|def|end|class|if|else/))
                      action { [text.upcase.to_sym, text.chomp] }
 
-                  when (text = @ss.scan(/[-]?[\d]+/))
+                  when (text = @ss.scan(/[\d]+/))
                      action { [:INTEGER, text.to_i] }
 
                   when (text = @ss.scan(/[a-zA-Z_][\w]*/))
                      action { [:IDEN, text.chomp] }
+
+                  when (text = @ss.scan(/\*\*|==|\!=|>=|<=|>|</))
+                     action { [$REF[text], text] }
 
                   when (text = @ss.scan(/./))
                      action { [text, text] }

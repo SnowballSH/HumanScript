@@ -51,7 +51,7 @@ end
 
 VarAssignNode = Struct.new(:name, :value) do
   def eval(ctx)
-    ctx.current_class.assign(name, value.eval(ctx)) unless name[0] == '_'
+    ctx.current_class.assign(name, value.eval(ctx)) unless name == '_'
   end
 end
 
