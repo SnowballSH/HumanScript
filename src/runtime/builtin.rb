@@ -6,6 +6,9 @@ $constants['Object'] = HClass.new(nil, 'Object')
 $constants['Function'] = HClass.new($constants['Object'], 'Function')
 
 $constants['Number'] = HClass.new($constants['Object'], 'Number')
+$constants['infinity'] = $constants['Number'].new_with_value(Float::INFINITY)
+$constants['nan'] = $constants['Number'].new_with_value(Float::NAN)
+
 $constants['Bool'] = HClass.new($constants['Object'], 'Bool')
 $constants['true'] = $constants['Bool'].new_with_value(true)
 $constants['false'] = $constants['Bool'].new_with_value(false)
