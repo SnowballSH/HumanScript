@@ -2,7 +2,9 @@
 
 ## A language for machine, programmers, and everyone.
 
-## You can try out the language on [This repl.it link](https://repl.it/@SnowballSH/HumanScript)
+#### Everything in this language are things a human would do! (Always, Rest, Rep, Happy, Sad, Dead, etc.)
+
+#### You can try out the language on [This repl.it link](https://repl.it/@SnowballSH/HumanScript)
 
 ## Reference Doc:
 
