@@ -1,5 +1,5 @@
 always
   pln(1)
-  break
+  rest
   pln(2)
 end

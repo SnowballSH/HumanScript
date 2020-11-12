@@ -1,6 +1,6 @@
 class Parser
 
-token INTEGER IDEN NEWLINE DEFINE DEF END AS CLASS REP ALWAYS BREAK
+token INTEGER IDEN NEWLINE DEFINE DEF END AS CLASS REP ALWAYS REST
       IF ELSE
       POW DBEQ NTEQ GT LT GTEQ LTEQ
 
@@ -129,7 +129,7 @@ Loop:
 ;
 
 Break:
-    BREAK                  { result = BreakNode.new }
+    REST                  { result = BreakNode.new }
 ;
 
 Terminator:
