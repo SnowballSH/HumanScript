@@ -222,7 +222,7 @@ returns Number 1 to the power of Number 2
 
 returns the square root of the receiver
 
-#### See other methods [here](https://)
+#### See other methods [here](https://github.com/SnowballSH/HumanScript#other-number-class-methods)
 
 ---
 
