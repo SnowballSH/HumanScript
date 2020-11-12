@@ -10,6 +10,7 @@ macro
   
   IDEN          [a-zA-Z_][\w]*
   NUM           [\d]+
+  STRING        "([^"\n\r]|\")*"
 
 rule
   {BLANK}       # no action
@@ -18,6 +19,7 @@ rule
   {NEWLINE}     { [:NEWLINE, text] }
   {KEYWORD}     { [text.upcase.to_sym, text.chomp] }
   {NUM}         { [:INTEGER, text.to_i] }
+  {STRING}      { [:STRING, text.chomp[1...-1]] }
   {IDEN}        { [:IDEN, text.chomp] }
   {OP}          { [$REF[text], text] }
   .             { [text, text] }

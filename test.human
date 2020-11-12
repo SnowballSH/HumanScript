@@ -1,5 +1,1 @@
-always
-  pln(1)
-  rest
-  pln(2)
-end
+pln("Hello, world!")

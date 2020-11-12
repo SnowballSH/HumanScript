@@ -1,6 +1,7 @@
 class Parser
 
-token INTEGER IDEN NEWLINE DEFINE DEF END AS CLASS REP ALWAYS REST
+token INTEGER IDEN STRING
+      NEWLINE DEFINE DEF END AS CLASS REP ALWAYS REST
       IF ELSE
       POW DBEQ NTEQ GT LT GTEQ LTEQ
 
@@ -30,7 +31,8 @@ Expressions:
 ;
 
 Expression:
-    INTEGER                     { result = IntegerNode.new(val[0].to_i) }
+    INTEGER                     { result = IntegerNode.new(val[0]) }
+  | STRING                      { result = StringNode.new(val[0]) }
   | Operation
   | Unary
   | Comp

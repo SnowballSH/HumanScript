@@ -75,6 +75,9 @@ class Lexer < Racc::Parser
                   when (text = @ss.scan(/[\d]+/))
                      action { [:INTEGER, text.to_i] }
 
+                  when (text = @ss.scan(/"([^"\n\r]|\")*"/))
+                     action { [:STRING, text.chomp[1...-1]] }
+
                   when (text = @ss.scan(/[a-zA-Z_][\w]*/))
                      action { [:IDEN, text.chomp] }
 

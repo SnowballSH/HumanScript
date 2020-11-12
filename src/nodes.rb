@@ -25,6 +25,12 @@ IntegerNode = Struct.new(:value) do
   end
 end
 
+StringNode = Struct.new(:value) do
+  def eval(_ctx)
+    $constants['String'].new_with_value(value)
+  end
+end
+
 VarAccessNode = Struct.new(:receiver, :name) do
   def eval(ctx)
     value = receiver ? receiver.eval(ctx) : ctx.current_self
