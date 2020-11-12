@@ -222,6 +222,53 @@ returns Number 1 to the power of Number 2
 
 returns the square root of the receiver
 
+#### See other methods [here](https://)
+
+---
+
+### Class 'Emotion'
+
+#### instances:
+
+##### happy
+
+same as true in other languages
+
+```python
+happy
+>>> happy
+```
+
+##### sad
+
+same as false in other languages
+
+```python
+sad
+>>> sad
+```
+
+---
+
+### Class 'NilClass'
+
+#### instances:
+
+##### dead
+
+same as nil or none or void in other languages
+
+does not trigger if syntax
+
+```python
+dead
+>>> dead
+```
+
+---
+
+### Other 'Number' Class Methods
+
 #### Number == Number -> Emotion
 
 _Same as Number.\_\_eq(Number)_
