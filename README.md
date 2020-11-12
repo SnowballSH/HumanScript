@@ -4,6 +4,8 @@
 
 #### Everything in this language are things a human would do! (Always, Rest, Rep, Happy, Sad, Dead, etc.)
 
+### See the Easy Syntax and Language tour [here](https://github.com/SnowballSH/HumanScript/blob/master/Ref.md)
+
 #### You can try out the language on [This repl.it link](https://repl.it/@SnowballSH/HumanScript)
 
 ## Sample code (nth Fibonacci)
