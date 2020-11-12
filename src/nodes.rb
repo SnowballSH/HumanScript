@@ -5,7 +5,7 @@ $in_loop = false
 
 Nodes = Struct.new(:nodes) do
   def eval(ctx)
-    r = $constants['nil']
+    r = $constants['dead']
     nodes.each do |n|
       r = n.eval(ctx)
       break if $do_break
@@ -114,7 +114,7 @@ IfNode = Struct.new(:cond, :body) do
     if cond.eval(ctx).value
       body.eval(ctx)
     else
-      $constants['nil']
+      $constants['dead']
     end
   end
 end

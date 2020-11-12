@@ -1,1 +1,4 @@
-pln(("     ddd  " + "mmm ").trim)
+if (happy)
+  pln(sad)
+  pln(dead)
+end

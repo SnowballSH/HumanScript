@@ -1,7 +1,7 @@
 Prim = {
   Number: 0,
   String: '',
-  Function: HNativeMethod.new(-1, proc {}),
+  Function: HNativeMethod.new(0, proc {}),
   Nil: nil,
   Class: nil,
   Object: nil

@@ -68,30 +68,30 @@ end
 
 $constants['Number'].def :__eq, 1 do |receiver, arguments|
   result = receiver.value == arguments.first.value
-  $constants['Bool'].new_with_value(result)
+  $constants['Emotion'].new_with_value(result)
 end
 
 $constants['Number'].def :__neq, 1 do |receiver, arguments|
   result = receiver.value != arguments.first.value
-  $constants['Bool'].new_with_value(result)
+  $constants['Emotion'].new_with_value(result)
 end
 
 $constants['Number'].def :__gt, 1 do |receiver, arguments|
   result = receiver.value > arguments.first.value
-  $constants['Bool'].new_with_value(result)
+  $constants['Emotion'].new_with_value(result)
 end
 
 $constants['Number'].def :__lt, 1 do |receiver, arguments|
   result = receiver.value < arguments.first.value
-  $constants['Bool'].new_with_value(result)
+  $constants['Emotion'].new_with_value(result)
 end
 
 $constants['Number'].def :__gteq, 1 do |receiver, arguments|
   result = receiver.value >= arguments.first.value
-  $constants['Bool'].new_with_value(result)
+  $constants['Emotion'].new_with_value(result)
 end
 
 $constants['Number'].def :__lteq, 1 do |receiver, arguments|
   result = receiver.value <= arguments.first.value
-  $constants['Bool'].new_with_value(result)
+  $constants['Emotion'].new_with_value(result)
 end
