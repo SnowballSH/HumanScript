@@ -10,7 +10,7 @@ macro
   
   IDEN          [a-zA-Z_][\w]*
   NUM           [\d]+
-  STRING        "([^"\n\r]|\")*"
+  STRING        "[^\n\r""]*"
 
 rule
   {BLANK}       # no action

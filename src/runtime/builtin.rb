@@ -28,4 +28,5 @@ end
 require_relative './builtin_types/object'
 
 require_relative './builtin_types/number'
+require_relative './builtin_types/string'
 require_relative './builtin_types/bool'

@@ -1,1 +1,1 @@
-pln("Hello, world!")
+pln(("     ddd  " + "mmm ").trim)
