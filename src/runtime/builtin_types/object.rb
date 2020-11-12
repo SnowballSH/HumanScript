@@ -14,7 +14,3 @@ $constants['Object'].def :print, 1 do |_receiver, arguments|
   print(*arguments.map { |x| Ref.key?(x.value.to_sym) ? Ref[x.to_sym] : x.value }.join(' '))
   $constants['dead']
 end
-
-$constants['Object'].def :nonz, 0 do |_receiver, _arguments|
-  $constants['Number'].new_with_value(0)
-end
