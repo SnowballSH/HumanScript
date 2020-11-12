@@ -1,6 +1,6 @@
 class Parser
 
-token INTEGER IDEN NEWLINE DEFINE DEF END AS CLASS
+token INTEGER IDEN NEWLINE DEFINE DEF END AS CLASS REP ALWAYS BREAK
       IF ELSE
       POW DBEQ NTEQ GT LT GTEQ LTEQ
 
@@ -40,6 +40,8 @@ Expression:
   | Set
   | Class
   | Cond
+  | Loop
+  | Break
   | '(' Expression ')'          { result = val[1] }
 ;
 
@@ -112,13 +114,22 @@ Class:
 ParamList:
     /* nothing */                 { result = [] }
   | IDEN                          { result = val }
-  | ParamList "," IDEN            { result = val[0] << val[2] }
+  | ParamList ',' IDEN            { result = val[0] << val[2] }
 ;
 
 Cond:
     IF Expression Terminator Expressions 
     Terminator ELSE Block         { result = IfElseNode.new(val[1], val[3], val[6]) }
   | IF Expression Block           { result = IfNode.new(val[1], val[2]) }
+;
+
+Loop:
+    REP Expression Block          { result = RepNode.new(val[1], val[2]) }
+  | ALWAYS Block                  { result = AlwaysNode.new(val[1]) }
+;
+
+Break:
+    BREAK                  { result = BreakNode.new }
 ;
 
 Terminator:

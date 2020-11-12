@@ -5,7 +5,7 @@ macro
   LONGCOMMENT   --\[(?:[^\]\]]|)*\]
   SHORTCOMMENT  --.*
 
-  KEYWORD       define|as|def|end|class|if|else
+  KEYWORD       define|as|def|end|class|if|else|rep|always|break
   OP            \*\*|==|\!=|>=|<=|>|<
   
   IDEN          [a-zA-Z_][\w]*

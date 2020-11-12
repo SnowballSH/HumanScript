@@ -1,4 +1,5 @@
-def solution(a,b);m=1;r=0;def g(a, b);if(k=a+b)>0;m=m*10;r=r+k%10*m;g(a/10,b/10);else;r;end;end;g(a,b)/10;end
-
-pln(solution(456, 1734))
-pln(solution(1234567765432112345677654321, 7654321123456776543211234567))
+always
+  pln(1)
+  break
+  pln(2)
+end
