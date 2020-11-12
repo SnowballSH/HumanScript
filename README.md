@@ -176,25 +176,25 @@ nan
 
 #### class methods:
 
-##### Number + Number -> Number
+#### Number + Number -> Number
 
 _Same as Number.\_\_add(Number)_
 
 returns the sum of two numbers
 
-##### Number - Number -> Number
+#### Number - Number -> Number
 
 _Same as Number.\_\_sub(Number)_
 
 returns the difference of two numbers
 
-##### Number \* Number -> Number
+#### Number \* Number -> Number
 
 _Same as Number.\_\_mul(Number)_
 
 returns the product of two numbers
 
-##### Number / Number -> Number | infinity
+#### Number / Number -> Number | infinity
 
 _Same as Number.\_\_div(Number)_
 
@@ -202,7 +202,7 @@ returns the division result of two numbers (floored)
 
 _returns `infinity` when attempting to divide by 0_
 
-##### Number % Number -> Number | infinity
+#### Number % Number -> Number | infinity
 
 _Same as Number.\_\_mod(Number)_
 
@@ -210,47 +210,47 @@ returns the modulos result of two numbers
 
 _returns `infinity` when attempting to mod by 0_
 
-##### Number \*\* Number -> Number
+#### Number \*\* Number -> Number
 
 _Same as Number.\_\_pow(Number)_
 
 returns Number 1 to the power of Number 2
 
-##### Number.sqrt() -> Number | infinity
+#### Number.sqrt() -> Number | infinity
 
 returns the square root of the receiver
 
-##### Number == Number -> Emotion
+#### Number == Number -> Emotion
 
 _Same as Number.\_\_eq(Number)_
 
 returns Number == Number 2
 
-##### Number != Number -> Emotion
+#### Number != Number -> Emotion
 
 _Same as Number.\_\_neq(Number)_
 
 returns Number != Number 2
 
-##### Number > Number -> Emotion
+#### Number > Number -> Emotion
 
 _Same as Number.\_\_gt(Number)_
 
 returns Number > Number 2
 
-##### Number < Number -> Emotion
+#### Number < Number -> Emotion
 
 _Same as Number.\_\_lt(Number)_
 
 returns Number < Number 2
 
-##### Number >= Number -> Emotion
+#### Number >= Number -> Emotion
 
 _Same as Number.\_\_gteq(Number)_
 
 returns Number >= Number 2
 
-##### Number <= Number -> Emotion
+#### Number <= Number -> Emotion
 
 _Same as Number.\_\_lteq(Number)_
 
