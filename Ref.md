@@ -4,6 +4,19 @@
 
 ### Syntax
 
+#### Comment
+
+`-- <Anything>`
+
+```
+--[
+  <Anything>
+  <Anything>
+  <Anything>
+  ...
+]
+```
+
 #### Variable Assignment
 
 ##### Constant assignment
