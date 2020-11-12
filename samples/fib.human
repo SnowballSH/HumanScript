@@ -1,14 +1,3 @@
-# HumanScript Programming Language
-
-## A language for machine, programmers, and everyone.
-
-#### Everything in this language are things a human would do! (Always, Rest, Rep, Happy, Sad, Dead, etc.)
-
-#### You can try out the language on [This repl.it link](https://repl.it/@SnowballSH/HumanScript)
-
-## Sample code (nth Fibonacci)
-
-```ruby
 def fib(n)
   a = 0; b = 1
 
@@ -37,4 +26,3 @@ fib(999)  --[
   3563129766736422103503246348504103776803673341511728991697
   23197082763985615764450078474174626
 ]
-```
