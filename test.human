@@ -1,3 +1,9 @@
 "Alex".say("I am", print("The real "))
 x = 3
 pln(x + 5)
+
+null = dead
+pln(null.alive)
+
+str = "     d"
+pln(str.trim.alive)

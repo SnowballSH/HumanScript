@@ -39,7 +39,7 @@ VarAccessNode = Struct.new(:receiver, :name) do
     else
       res = value.runtime_class.runtime_vars[name]
       res ||= ctx.locals[name]
-      res ||= $constants[name]
+      res ||= $constants[name] unless receiver
       raise "undefined local or method '#{name}'" unless res
 
       res
