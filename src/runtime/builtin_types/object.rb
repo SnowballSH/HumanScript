@@ -18,3 +18,8 @@ $constants['Object'].def :print, 1 do |_receiver, arguments|
   print(*arguments.map { |x| refer(x) }.join(' '))
   $constants['dead']
 end
+
+$constants['Object'].def :say, 1 do |receiver, arguments|
+  print(refer(receiver) + ' says: ' + arguments.map { |x| refer(x) }.join(' ') + "\n")
+  $constants['dead']
+end
