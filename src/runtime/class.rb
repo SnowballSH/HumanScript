@@ -20,6 +20,16 @@ class HClass < HObject
     method
   end
 
+  def try_lookup(method_name)
+    method = @runtime_vars[method_name]
+
+    method = @runtime_superclass.try_lookup(method_name) if method.nil? && @runtime_superclass
+    return nil if method.nil?
+    return nil unless method.callable
+
+    method
+  end
+
   def def(name, arg_amount, &block)
     x = $constants['Function'].new_with_value(HNativeMethod.new(arg_amount, block))
     x.callable = true

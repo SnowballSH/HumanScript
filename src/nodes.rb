@@ -34,7 +34,7 @@ end
 VarAccessNode = Struct.new(:receiver, :name) do
   def eval(ctx)
     value = receiver ? receiver.eval(ctx) : ctx.current_self
-    if value.runtime_class.runtime_vars[name] && value.runtime_class.runtime_vars[name].callable
+    if value.runtime_class.try_lookup(name)
       value.call(name, [])
     else
       res = value.runtime_class.runtime_vars[name]

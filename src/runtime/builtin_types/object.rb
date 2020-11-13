@@ -23,3 +23,7 @@ $constants['Object'].def :say, 1 do |receiver, arguments|
   print(refer(receiver) + ' says: ' + arguments.map { |x| refer(x) }.join(' ') + "\n")
   $constants['dead']
 end
+
+$constants['Object'].def :alive, 0 do |receiver, _arguments|
+  receiver.value.nil? ? $constants['sad'] : $constants['happy']
+end
