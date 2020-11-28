@@ -13,7 +13,7 @@ class HClass < HObject
     method = @runtime_vars[method_name]
     method = method.value if method
 
-    method = @runtime_superclass.lookup(method_name) if method.nil? && @runtime_superclass
+    method = @runtime_superclass.lookup(method_name) if method.nil? && !@runtime_superclass.nil?
     raise "Method not found: #{method_name}" if method.nil?
     raise "#{method_name} is not callable" unless method.callable
 
@@ -23,7 +23,7 @@ class HClass < HObject
   def try_lookup(method_name)
     method = @runtime_vars[method_name]
 
-    method = @runtime_superclass.try_lookup(method_name) if method.nil? && @runtime_superclass
+    method = @runtime_superclass.try_lookup(method_name) if method.nil? && !@runtime_superclass.nil?
     return nil if method.nil?
     return nil unless method.callable
 

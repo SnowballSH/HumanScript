@@ -1,7 +1,7 @@
 require_relative './src/parser.rb'
 
 def run(code)
-  r =  Parser.new.parse(code).eval(RootContext)
+  Parser.new.parse(code).eval(RootContext)
 end
 
 def main
